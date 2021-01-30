@@ -1,16 +1,32 @@
+import { Switch, Route } from 'react-router-dom';
 import Container from 'components/Container';
-import ContactForm from 'components/ContactForm';
-import Filter from 'components/Filter';
-import ContactList from 'components/ContactList';
+import AppBar from 'components/AppBar';
+
+// Статические импорты
+import HomeView from 'views/HomeView';
+import RegisterView from 'views/RegisterView';
+import LoginView from 'views/LoginView';
+import ContactsView from 'views/ContactsView';
 
 const App = () => (
     <Container>
-        <h1>Phonebook</h1>
-        <ContactForm />
-
-        <h2>Contacts</h2>
-        <Filter />
-        <ContactList />
+        {/* import {ToastContainer} from 'react-toastify'; */}
+        {/* <ToastContainer /> */}
+        <AppBar />
+        <Switch>
+            <Route exact path="/">
+                <HomeView />
+            </Route>
+            <Route path="/register">
+                <RegisterView />
+            </Route>
+            <Route path="/login">
+                <LoginView />
+            </Route>
+            <Route path="/contacts">
+                <ContactsView />
+            </Route>
+        </Switch>
     </Container>
 );
 
