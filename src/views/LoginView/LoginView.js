@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import s from './LoginView.module.css';
-// import { authOperations } from 'redux/auth';
+import { authOperations } from 'redux/auth';
 
 const LoginView = () => {
     const [email, setEmail] = useState('');
@@ -27,7 +27,7 @@ const LoginView = () => {
 
     const handleSubmit = event => {
         event.preventDefault();
-        // dispatch(authOperations.logIn({ email, password }));
+        dispatch(authOperations.logIn({ email, password }));
         reset();
     };
 

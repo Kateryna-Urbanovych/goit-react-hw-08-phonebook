@@ -3,7 +3,7 @@ import s from './AuthNav.module.css';
 
 const AuthNav = () => {
     return (
-        <>
+        <div>
             <NavLink
                 to="/register"
                 className={s.link}
@@ -18,7 +18,7 @@ const AuthNav = () => {
             >
                 Логин
             </NavLink>
-        </>
+        </div>
     );
 };
 

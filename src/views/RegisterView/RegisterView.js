@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import s from './RegisterView.module.css';
-// import { authOperations } from 'redux/auth';
+import { authOperations } from 'redux/auth';
 
 const RegisterView = () => {
     const [name, setName] = useState('');
@@ -32,7 +32,7 @@ const RegisterView = () => {
 
     const handleSubmit = event => {
         event.preventDefault();
-        // dispatch(authOperations.register({ name, email, password }));
+        dispatch(authOperations.register({ name, email, password }));
         reset();
     };
 

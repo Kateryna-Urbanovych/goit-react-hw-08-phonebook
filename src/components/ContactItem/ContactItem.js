@@ -9,6 +9,17 @@ const ContactItem = ({ name, number, id }) => {
     return (
         <>
             {name}: {number}
+            {/* <button
+                type="button"
+                className={s.btnUpdate}
+                onClick={() =>
+                    dispatch(
+                        contactsOperations.updateContact({ id, name, number }),
+                    )
+                }
+            >
+                Update
+            </button> */}
             <button
                 type="button"
                 className={s.btnDelete}
