@@ -1,18 +1,37 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { Switch, Route } from 'react-router-dom';
+import { useEffect, lazy, Suspense } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Switch } from 'react-router-dom';
 import Container from 'components/Container';
 import AppBar from 'components/AppBar';
-import { authOperations } from 'redux/auth';
+import PrivateRoute from 'components/PrivateRoute';
+import PublicRoute from 'components/PublicRoute';
+import { authOperations, authSelectors } from 'redux/auth';
+
+// Динамические импорты
+const HomeView = lazy(() =>
+    import('views/HomeView' /* webpackChunkName: "home-view" */),
+);
+const RegisterView = lazy(() =>
+    import('views/RegisterView' /* webpackChunkName: "register-view" */),
+);
+const LoginView = lazy(() =>
+    import('views/LoginView' /* webpackChunkName: "login-view" */),
+);
+const ContactsView = lazy(() =>
+    import('views/ContactsView' /* webpackChunkName: "contacts-view" */),
+);
 
 // Статические импорты
-import HomeView from 'views/HomeView';
-import RegisterView from 'views/RegisterView';
-import LoginView from 'views/LoginView';
-import ContactsView from 'views/ContactsView';
+// import HomeView from 'views/HomeView';
+// import RegisterView from 'views/RegisterView';
+// import LoginView from 'views/LoginView';
+// import ContactsView from 'views/ContactsView';
 
 const App = () => {
     const dispatch = useDispatch();
+    const isFetchingCurrentUser = useSelector(
+        authSelectors.getIsFetchingCurrentUser,
+    );
 
     useEffect(() => {
         dispatch(authOperations.fetchCurrentUser());
@@ -22,21 +41,38 @@ const App = () => {
         <Container>
             {/* import {ToastContainer} from 'react-toastify'; */}
             {/* <ToastContainer /> */}
-            <AppBar />
-            <Switch>
-                <Route exact path="/">
-                    <HomeView />
-                </Route>
-                <Route path="/register">
-                    <RegisterView />
-                </Route>
-                <Route path="/login">
-                    <LoginView />
-                </Route>
-                <Route path="/contacts">
-                    <ContactsView />
-                </Route>
-            </Switch>
+
+            {isFetchingCurrentUser ? (
+                <h1>Показываем React Skeleton</h1>
+            ) : (
+                <>
+                    <AppBar />
+
+                    <Switch>
+                        <Suspense fallback={<p>Загружаем...</p>}>
+                            <PublicRoute exact path="/">
+                                <HomeView />
+                            </PublicRoute>
+
+                            <PublicRoute path="/register" restricted>
+                                <RegisterView />
+                            </PublicRoute>
+
+                            <PublicRoute
+                                path="/login"
+                                restricted
+                                redirectTo="/contacts"
+                            >
+                                <LoginView />
+                            </PublicRoute>
+
+                            <PrivateRoute path="/contacts" redirectTo="/login">
+                                <ContactsView />
+                            </PrivateRoute>
+                        </Suspense>
+                    </Switch>
+                </>
+            )}
         </Container>
     );
 };
