@@ -1,13 +1,42 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import s from './RegisterView.module.css';
+
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+
 import { authOperations } from 'redux/auth';
+
+const useStyles = makeStyles(theme => ({
+    paper: {
+        marginTop: theme.spacing(3),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
+    avatar: {
+        margin: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+        width: '100%',
+        marginTop: theme.spacing(1),
+    },
+    submit: {
+        margin: theme.spacing(3, 0, 2),
+    },
+}));
 
 const RegisterView = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
+    const classes = useStyles();
 
     const handleChange = ({ target }) => {
         const { name, value } = target;
@@ -43,45 +72,72 @@ const RegisterView = () => {
     };
 
     return (
-        <>
-            <h1>Страница регистрации</h1>
+        <Container component="main" maxWidth="xs">
+            <div className={classes.paper}>
+                <Avatar className={classes.avatar}>
+                    <LockOutlinedIcon />
+                </Avatar>
+                <Typography component="h1" variant="h5">
+                    Sign up
+                </Typography>
 
-            <form onSubmit={handleSubmit} className={s.form} autoComplete="off">
-                <label className={s.label}>
-                    Имя
-                    <input
+                <form
+                    onSubmit={handleSubmit}
+                    className={classes.form}
+                    autoComplete="off"
+                >
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
                         type="text"
+                        id="name"
+                        label="Name"
                         name="name"
                         value={name}
                         onChange={handleChange}
+                        autoFocus
                     />
-                </label>
-                <label className={s.label}>
-                    Почта
-                    <input
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
                         type="email"
+                        id="email"
+                        label="Email Address"
                         name="email"
                         value={email}
                         onChange={handleChange}
                     />
-                </label>
-                <label className={s.label}>
-                    Пароль
-                    <input
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
                         type="password"
+                        id="password"
+                        label="Password"
                         name="password"
                         value={password}
                         onChange={handleChange}
                     />
-                </label>
-                <button
-                    type="submit"
-                    disabled={name === '' || email === '' || password === ''}
-                >
-                    Зарегистрироваться
-                </button>
-            </form>
-        </>
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className={classes.submit}
+                        disabled={
+                            name === '' || email === '' || password === ''
+                        }
+                    >
+                        Sign up
+                    </Button>
+                </form>
+            </div>
+        </Container>
     );
 };
 

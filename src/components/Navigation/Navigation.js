@@ -14,7 +14,7 @@ const Navigation = () => {
                 className={s.link}
                 activeClassName={s.activeLink}
             >
-                Главная
+                Home
             </NavLink>
             {isLoggedIn && (
                 <NavLink
@@ -22,7 +22,7 @@ const Navigation = () => {
                     className={s.link}
                     activeClassName={s.activeLink}
                 >
-                    Контакты
+                    Contacts
                 </NavLink>
             )}
         </nav>

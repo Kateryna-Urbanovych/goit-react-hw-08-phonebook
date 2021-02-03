@@ -43,13 +43,13 @@ const App = () => {
             {/* <ToastContainer /> */}
 
             {isFetchingCurrentUser ? (
-                <h1>Показываем React Skeleton</h1>
+                <h1>Show React Skeleton</h1>
             ) : (
                 <>
                     <AppBar />
 
                     <Switch>
-                        <Suspense fallback={<p>Загружаем...</p>}>
+                        <Suspense fallback={<p>Loading...</p>}>
                             <PublicRoute exact path="/">
                                 <HomeView />
                             </PublicRoute>

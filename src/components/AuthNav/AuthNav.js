@@ -20,7 +20,7 @@ const AuthNav = () => {
                     className={s.link}
                     activeClassName={s.activeLink}
                 >
-                    Регистрация
+                    Sign in
                 </NavLink>
             </Button>
 
@@ -30,7 +30,7 @@ const AuthNav = () => {
                     className={s.link}
                     activeClassName={s.activeLink}
                 >
-                    Логин
+                    Login
                 </NavLink>
             </Button>
         </div>
