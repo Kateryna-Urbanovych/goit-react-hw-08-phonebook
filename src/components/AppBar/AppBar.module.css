@@ -2,5 +2,12 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid #2a363b;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-bottom: 1px solid #bdbdbd;
+
+    font-size: 20px;
+    line-height: 2;
+    color: red;
+    background-color: #eeeeee;
 }

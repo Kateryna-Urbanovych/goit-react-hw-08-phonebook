@@ -3,10 +3,14 @@
     text-decoration: none;
     padding: 12px;
     font-weight: 700;
-    color: #2a363b;
+    color: #424242;
 }
 
 .activeLink {
     composes: link;
-    color: #e84a5f;
+    color: #c62828;
+}
+
+.link:hover {
+    text-decoration: underline;
 }
