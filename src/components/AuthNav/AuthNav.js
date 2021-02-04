@@ -20,7 +20,7 @@ const AuthNav = () => {
                     className={s.link}
                     activeClassName={s.activeLink}
                 >
-                    Sign in
+                    Sign up
                 </NavLink>
             </Button>
 
