@@ -1,13 +1,40 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import s from './ContactForm.module.css';
+import { toast } from 'react-toastify';
+
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
 import { contactsOperations, contactsSelectors } from 'redux/contacts';
+
+const useStyles = makeStyles(theme => ({
+    paper: {
+        marginTop: theme.spacing(3),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
+    form: {
+        width: '100%',
+        marginTop: theme.spacing(1),
+    },
+    field: {
+        marginRight: theme.spacing(4),
+    },
+    submit: {
+        margin: theme.spacing(2, 0, 2),
+    },
+}));
 
 export default function ContactForm() {
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
     const contactsNames = useSelector(contactsSelectors.getContactsNames);
     const dispatch = useDispatch();
+    const classes = useStyles();
 
     const handleChange = ({ target }) => {
         const { name, value } = target;
@@ -30,7 +57,7 @@ export default function ContactForm() {
         event.preventDefault();
 
         if (contactsNames.includes(name.toLowerCase())) {
-            alert(`${name} is already in contacts`);
+            toast.error(`${name} is already in contacts`);
             return;
         }
 
@@ -54,36 +81,48 @@ export default function ContactForm() {
     };
 
     return (
-        <form onSubmit={handleSubmit} className={s.form}>
-            <label className={s.label}>
-                Name
-                <input
-                    type="text"
-                    className={s.input}
-                    name="name"
-                    value={name}
-                    onChange={handleChange}
+        <Container component="main" maxWidth="xs">
+            <div className={classes.paper}>
+                <Typography component="h1" variant="h2">
+                    Phone book
+                </Typography>
+
+                <form
+                    onSubmit={handleSubmit}
+                    className={classes.form}
                     autoComplete="off"
-                />
-            </label>
-            <label className={s.label}>
-                Number
-                <input
-                    type="tel"
-                    className={s.input}
-                    name="number"
-                    value={number}
-                    onChange={handleChange}
-                    autoComplete="off"
-                />
-            </label>
-            <button
-                type="submit"
-                className={s.button}
-                disabled={name === '' || number === ''}
-            >
-                Add contact
-            </button>
-        </form>
+                >
+                    <TextField
+                        variant="standard"
+                        type="text"
+                        id="name"
+                        label="Name"
+                        name="name"
+                        value={name}
+                        onChange={handleChange}
+                        className={classes.field}
+                    />
+                    <TextField
+                        variant="standard"
+                        type="tel"
+                        id="number"
+                        label="Number"
+                        name="number"
+                        value={number}
+                        onChange={handleChange}
+                    />
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className={classes.submit}
+                        disabled={name === '' || number === ''}
+                    >
+                        Add contact
+                    </Button>
+                </form>
+            </div>
+        </Container>
     );
 }

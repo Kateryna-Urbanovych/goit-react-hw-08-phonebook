@@ -1,6 +1,8 @@
 import { useEffect, lazy, Suspense } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Switch } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Container from 'components/Container';
 import AppBar from 'components/AppBar';
 import PrivateRoute from 'components/PrivateRoute';
@@ -39,8 +41,7 @@ const App = () => {
 
     return (
         <Container>
-            {/* import {ToastContainer} from 'react-toastify'; */}
-            {/* <ToastContainer /> */}
+            <ToastContainer />
 
             {isFetchingCurrentUser ? (
                 <h1>Show React Skeleton</h1>
@@ -54,7 +55,11 @@ const App = () => {
                                 <HomeView />
                             </PublicRoute>
 
-                            <PublicRoute path="/register" restricted>
+                            <PublicRoute
+                                path="/register"
+                                restricted
+                                redirectTo="/contacts"
+                            >
                                 <RegisterView />
                             </PublicRoute>
 

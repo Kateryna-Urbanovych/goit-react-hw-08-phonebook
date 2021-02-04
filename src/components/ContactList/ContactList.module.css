@@ -6,3 +6,7 @@
 .contactItem {
     margin-bottom: 8px;
 }
+
+.contactsNotFound {
+    text-align: center;
+}

@@ -1,21 +1,14 @@
-.btnDelete {
-    cursor: pointer;
-    margin-left: 10px;
-    padding: 1px 10px;
-    font-size: 15px;
-    border: 2px solid rgb(161, 5, 5);
-    border-radius: 5px;
+.listItem {
+    padding: 0;
 }
 
-.btnUpdate {
-    cursor: pointer;
-    margin-left: 10px;
-    padding: 1px 10px;
-    font-size: 15px;
-    border: 2px solid teal;
-    border-radius: 5px;
+.nameNumber {
+    font-size: 20px;
+    /* line-height: 1; */
 }
 
-.btnDelete:active {
-    background-color: #2471a3;
+.phoneNumber {
+    line-height: 1;
+    font-style: italic;
+    display: block;
 }
