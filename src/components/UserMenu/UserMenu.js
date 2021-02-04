@@ -1,9 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { authSelectors } from 'redux/auth';
+import UserAvatar from 'images/user-avatar.svg';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import Avatar from '@material-ui/core/Avatar';
 
 import s from './UserMenu.module.css';
 import { authOperations } from 'redux/auth';
@@ -11,9 +11,6 @@ import { authOperations } from 'redux/auth';
 const useStyles = makeStyles(theme => ({
     link: {
         margin: theme.spacing(1, 1.5),
-    },
-    avatar: {
-        marginRight: theme.spacing(1.5),
     },
 }));
 
@@ -24,7 +21,7 @@ const UserMenu = () => {
 
     return (
         <div className={s.container}>
-            <Avatar src="/broken-image.jpg" className={classes.avatar} />
+            <img src={UserAvatar} alt="Аватар" className={s.avatar} />
             <span className={s.name}>Welcome to Phonebook, {userName}</span>
             <Button
                 type="button"

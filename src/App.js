@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Container from 'components/Container';
 import AppBar from 'components/AppBar';
+import LoaderSpinner from 'components/Loader';
 import PrivateRoute from 'components/PrivateRoute';
 import PublicRoute from 'components/PublicRoute';
 import { authOperations, authSelectors } from 'redux/auth';
@@ -50,7 +51,7 @@ const App = () => {
                     <AppBar />
 
                     <Switch>
-                        <Suspense fallback={<p>Loading...</p>}>
+                        <Suspense fallback={<LoaderSpinner />}>
                             <PublicRoute exact path="/">
                                 <HomeView />
                             </PublicRoute>

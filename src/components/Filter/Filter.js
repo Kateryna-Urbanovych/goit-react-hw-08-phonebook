@@ -60,7 +60,7 @@ const Filter = () => {
 
 export default Filter;
 
-// Компонент InputBase
+// Компонент InputBase (библиотека material-ui)
 
 // import { makeStyles } from '@material-ui/core/styles';
 // import Paper from '@material-ui/core/Paper';
